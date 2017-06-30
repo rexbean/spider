@@ -13,6 +13,13 @@ class SpiderItem(scrapy.Item):
     # name = scrapy.Field()
     title = scrapy.Field(serializer='')
     url = scrapy.Field(serializer='')
-    account = scrapy.Field(serializer='')
     abtract = scrapy.Field(serializer='')
-    date = scrapy.Field(serializer='')
+
+
+class ArticleItem(scrapy.Item):
+    title = scrapy.Field()
+    date = scrapy.Field()
+    author = scrapy.Field()
+    account = scrapy.Field()
+    accountId = scrapy.Field()
+    content = scrapy.Field()
