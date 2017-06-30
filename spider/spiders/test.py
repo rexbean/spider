@@ -28,13 +28,14 @@ class Test(scrapy.Spider):
             # title
             titlePath = '//*[@id="sogou_vr_11002601_title_'+str(n)+'"]'
             title = response.xpath(titlePath + '//text()').extract()
+
             articleItem['title'] = self.appendStr(title)
             print 'title==', articleItem['title']
 
             # url
             url = response.xpath(titlePath + '/@href').extract()
-            articleItem['url'] = url
-            scrapy.request(url, callback=self.parseArticle)
+            articleItem['url'] = url[0]
+            yield scrapy.Request(url[0], callback=self.parse_Article)
             print 'href==', articleItem['url']
 
             # abract
@@ -45,8 +46,11 @@ class Test(scrapy.Spider):
             articleItem['abtract'] = self.appendStr(content)
             print articleItem['abtract']
 
-    def parseArticle(self, response):
-
+    def parse_Article(self, response):
+        title = response.xpath('//*[@id="activity-name"]//text()').extract()[0].strip()
+        print title
+        content = response.xpath('//*[@id="js_content"]//text()').extract().strip()
+        open(title+'.txt', 'wb').write(self.appendStr(content).encode("utf-8"))
 
     def appendStr(self, strList):
         s = ''
