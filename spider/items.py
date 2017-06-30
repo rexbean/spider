@@ -11,7 +11,8 @@ import scrapy
 class SpiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title = scrapy.Field()
-    account = scrapy.Field()
-    abtract = scrapy.Field()
-    date = scrapy.Field()
+    title = scrapy.Field(serializer='')
+    url = scrapy.Field(serializer='')
+    account = scrapy.Field(serializer='')
+    abtract = scrapy.Field(serializer='')
+    date = scrapy.Field(serializer='')
