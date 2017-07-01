@@ -8,12 +8,20 @@
 import scrapy
 
 
-class SpiderItem(scrapy.Item):
+class ArticleListItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title = scrapy.Field(serializer='')
-    url = scrapy.Field(serializer='')
-    abtract = scrapy.Field(serializer='')
+    title = scrapy.Field()
+    url = scrapy.Field()
+    abstract = scrapy.Field()
+    date = scrapy.Field()
+
+
+class AccountListItem(scrapy.Item):
+    accountId = scrapy.Field()
+    account = scrapy.Field()
+    url = scrapy.Field()
+    numPerMon = scrapy.Field()
 
 
 class ArticleItem(scrapy.Item):
