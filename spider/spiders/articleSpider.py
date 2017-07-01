@@ -13,7 +13,7 @@ from spider.items import AccountListItem
 from spider.utility import Utility
 
 
-class Test(scrapy.Spider):
+class ArticleSpider(scrapy.Spider):
 
     name = "article"
     urls = []

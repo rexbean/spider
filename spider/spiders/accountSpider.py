@@ -11,9 +11,10 @@ from spider.items import ArticleListItem
 from spider.items import ArticleItem
 from spider.items import AccountListItem
 from spider.utility import Utility
+from articleSpider import ArticleSpider
 
 
-class Test(scrapy.Spider):
+class AccountSpider(scrapy.Spider):
 
     name = "account"
     urls = []
@@ -28,7 +29,7 @@ class Test(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for n in range(9):
+        for n in range(1):
             accountListItem = AccountListItem()
             num             = self.accountListCon
 
@@ -40,7 +41,7 @@ class Test(scrapy.Spider):
 
             accountName = txtBox.xpath('./div/div[2]/p[1]/a//text()').extract()
             url         = txtBox.xpath('./div/div[2]/p[1]/a/@href').extract()[0]
-                                        
+
 
             accountListItem['account']      = Utility.listToStr(accountName)
             accountListItem['url']          = url
@@ -52,15 +53,16 @@ class Test(scrapy.Spider):
 
             url.replace('http', 'https')
 
-            # yield scrapy.Request(url, callback=self.parseAccount)
-
             cmd = "phantomjs ./getBody.js '%s'" % url
             stdout, stderr = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr = subprocess.PIPE).communicate()
             r = HtmlResponse(url=url, body=stdout)
-            self.parseAccount(r)
+
+            articleUrls = self.parseAccount(r)
+            for url in articleUrls:
+                yield scrapy.Request(url, callback=ArticleSpider().parseArticle)
 
     def parseAccount(self, response):
-
+            urls = []
             articleListItem = ArticleListItem()
             account = response.xpath('/html/body/div/div[1]/div[1]/div[1]/div/strong//text()').extract()[0].strip()
             print '----------------------'+account+'-------------------------'
@@ -71,7 +73,9 @@ class Test(scrapy.Spider):
                 print articleListItem['title']
                 # url
                 url = articlePath.xpath('./h4//@hrefs').extract()[0]
+                url = "https://mp.weixin.qq.com"+url
                 articleListItem['url'] = url
+
                 print articleListItem['url']
                 # date
                 date = articlePath.xpath('.//*[@class="weui_media_extra_info"]//text()').extract()[0]
@@ -81,3 +85,6 @@ class Test(scrapy.Spider):
                 abstract = articlePath.xpath('.//*[@class="weui_media_desc"]//text()').extract()
                 articleListItem['abstract'] = Utility.listToStr(abstract)
                 print articleListItem['abstract']
+
+                urls.append(url)
+            return urls
