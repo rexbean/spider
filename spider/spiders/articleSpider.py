@@ -73,4 +73,5 @@ class ArticleSpider(scrapy.Spider):
             articleItem['author'] = ''
 
         print articleItem['title']
-        Utility.writeArticleToFile(articleItem)
+        # Utility.writeArticleToFile(articleItem)
+        yield articleItem
