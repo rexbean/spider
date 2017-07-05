@@ -40,6 +40,7 @@ class AccountSpider(scrapy.Spider):
             accountId       = txtBox.xpath(accountIdPath).extract()
 
             accountName = txtBox.xpath('./div/div[2]/p[1]/a//text()').extract()
+
             url         = txtBox.xpath('./div/div[2]/p[1]/a/@href').extract()[0]
 
 
@@ -51,9 +52,11 @@ class AccountSpider(scrapy.Spider):
             print accountListItem['url']
             print accountListItem['accountId']
 
-            url.replace('http', 'https')
+            url = url.replace('http', 'https')
 
-            cmd = "phantomjs ./getBody.js '%s'" % url
+            cmd = "phantomjs spider/getBody.js '%s'" % url
+            print url
+            print cmd
             stdout, stderr = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr = subprocess.PIPE).communicate()
             r = HtmlResponse(url=url, body=stdout)
 
@@ -63,9 +66,12 @@ class AccountSpider(scrapy.Spider):
 
     def parseAccount(self, response):
             urls = []
+
             articleListItem = ArticleListItem()
-            account = response.xpath('/html/body/div/div[1]/div[1]/div[1]/div/strong//text()').extract()[0].strip()
-            print '----------------------'+account+'-------------------------'
+            title = response.xpath('/html/head/title//text()').extract()
+            print Utility.listToStr(title)
+            # account = response.xpath('//*[@class="profile_infoß"]//text()').extract()[0].strip()
+            print '----------------------account-------------------------'
             for articlePath in Selector(response=response).xpath('//*[@class="weui_media_box appmsg"]/div'):
                 # title
                 title = articlePath.xpath('./h4//text()').extract()[0].strip()
@@ -86,5 +92,5 @@ class AccountSpider(scrapy.Spider):
                 articleListItem['abstract'] = Utility.listToStr(abstract)
                 print articleListItem['abstract']
 
-                urls.append(url)
+            urls.append(url)
             return urls

@@ -7,7 +7,7 @@ import base64
 class Utility():
     @staticmethod
     def writeArticleToFile(a):
-        file = open('./data/'+a['title']+'.html', 'wb')
+        file = open('./data/'+a['title'].decode('utf-8').encode('cp936')+'.html', 'wb')
         try:
             file.write('<!doctype html>')
             file.write('<html>')
