@@ -31,3 +31,8 @@ class ArticleItem(scrapy.Item):
     account = scrapy.Field()
     accountId = scrapy.Field()
     content = scrapy.Field()
+
+class IpItem(scrapy.Item):
+    ip = scrapy.Field()
+    port = scrapy.Field()
+    

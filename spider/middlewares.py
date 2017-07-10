@@ -4,9 +4,27 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+import base64
 from scrapy import signals
 
+class UserAgentMiddleware(object):
+    """ 换User-Agent """
+    print "==== new agent ===="
+    def process_request(self, request, spider):
+        agent = random.choice(agents)
+        request.headers["User-Agent"] = agent
+
+class ProxyMiddleware(object):
+    # overwrite process request
+    def process_request(self, request, spider):
+        # Set the location of the proxy
+        request.meta['proxy'] = "http://218.4.101.130:83"
+
+        # Use the following lines if your proxy requires authentication
+        proxy_user_pass = "USERNAME:PASSWORD"
+        # setup basic authentication for the proxy
+        encoded_user_pass = base64.encodestring(proxy_user_pass)
+        request.headers['Proxy-Authorization'] = 'Basic ' + encoded_user_pass
 
 class SpiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
