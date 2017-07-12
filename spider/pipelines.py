@@ -28,3 +28,18 @@ class ArticlePipeline(object):
             i += 1
         Utility.writeArticleToFile(item)
         return item
+
+class ProxyPipeline(object):
+    def process_item(self,item,spider):
+        print'==========================================================='
+        proxy = item['ip']+':'+item['port']
+        print proxy
+        try:
+            proxy_support = urllib2.ProxyHandler({'http':proxy})
+            opener = urllib2.build_opener(proxy_support, urllib2.HTTPHandler)
+            urllib2.install_opener(opener)
+            content = urllib2.urlopen('http://192.243.119.61:18080/book',timeout=10).read()
+            print content
+        except:
+            print "can't access"
+            continue

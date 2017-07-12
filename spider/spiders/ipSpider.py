@@ -1,4 +1,5 @@
 import scrapy
+import urllib2
 from scrapy.selector import Selector
 from spider.items import IpItem
 from spider.utility import Utility
@@ -28,9 +29,8 @@ class IpSpider(scrapy.Spider):
         # print 'Cookie',Cookie
         Cookie = response.headers.getlist('Set-Cookie')
         # print 'Set-Cookie',Cookie
-
         # for i in range(1,1):
-        yield scrapy.Request("http://www.xicidaili.com/nn/2", headers=self.header,cookies={'xicidaili.com':Cookie},callback=self.parseIp)
+        yield scrapy.Request("http://www.xicidaili.com/nn/1", headers=self.header,cookies={'xicidaili.com':Cookie},callback=self.parseIp)
     def parseIp(self,response):
 
         # print response.body
@@ -42,10 +42,14 @@ class IpSpider(scrapy.Spider):
             ip      = sel.xpath('./td[2]/text()').extract()
             port    = sel.xpath('./td[3]/text()').extract()
 
+            if ip is '':
+                continue
+
             ipItem['ip']      = Utility.listToStr(ip)
             ipItem['port']    = Utility.listToStr(port)
 
             print ipItem['ip'],':',ipItem['port']
+
 
 
 
