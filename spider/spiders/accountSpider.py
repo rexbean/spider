@@ -4,13 +4,15 @@
 import scrapy
 import subprocess
 
+
 from scrapy.selector import Selector
 from scrapy.http import HtmlResponse
+
 
 from spider.items import ArticleListItem
 from spider.items import ArticleItem
 from spider.items import AccountListItem
-from spider.utility import Utility
+from utility.utility import Utility
 from articleSpider import ArticleSpider
 
 

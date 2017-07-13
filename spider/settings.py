@@ -73,9 +73,13 @@ SPIDER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'spider.pipelines.AgentIpStorePipeline':200,
     'spider.pipelines.ArticlePipeline': 300,
 }
-
+MONGO_HOST = "localhost"  # 主机IP
+MONGO_PORT = 27017  # 端口号
+MONGO_DB = "Spider"  # 库名
+MONGO_COLL = "agentIp"  # collection名
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

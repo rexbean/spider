@@ -10,7 +10,7 @@ from scrapy.http import HtmlResponse
 from spider.items import ArticleListItem
 from spider.items import ArticleItem
 from spider.items import AccountListItem
-from spider.utility import Utility
+from utility.utility import Utility
 
 
 class ArticleSpider(scrapy.Spider):

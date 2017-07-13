@@ -35,4 +35,7 @@ class ArticleItem(scrapy.Item):
 class IpItem(scrapy.Item):
     ip = scrapy.Field()
     port = scrapy.Field()
-    
+    protocol = scrapy.Field()
+    speed = scrapy.Field()
+    valid = scrapy.Field()
+    time = scrapy.Field()
