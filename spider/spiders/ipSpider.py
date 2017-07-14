@@ -16,10 +16,10 @@ class IpSpider(scrapy.Spider):
     allowed_domains = ["xicidaili.com","66ip.cn"]
 
     def start_requests(self):
-        for p in proxyList:
-            url = p['url'][0]
+        # for p in proxyList:
+            url = proxyList[2]['url'][0]
             print url
-            yield scrapy.Request(url,meta={'p':p}, callback=self.parse)
+            yield scrapy.Request(url,meta={'p':proxyList[2]}, callback=self.parse)
 
     def parse(self, response):
         ipItem  = IpItem()

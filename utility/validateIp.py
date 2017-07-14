@@ -40,7 +40,6 @@ class ValidateIp(object):
     def getType(self, proxies, url):
         types = -1
         speed = -1
-        print 'getType'
         try:
             start = time.time()
             r = requests.get(url=url, headers=config.get_header(), timeout=config.TIMEOUT, proxies=proxies)

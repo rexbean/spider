@@ -4,50 +4,72 @@ import random
 
 proxyList = [
     {
-        'url' : ['http://www.66ip.cn/areaindex_%s/%s.html' % (1, n) for n in range(1, 10)],
+        'url' : ['http://www.66ip.cn/areaindex_%s/%s.html' % (m, n) for m in range(1,35) for n in range(1, 10)],
         'root': "//*[@id='footer']/div/table/tr[position()>1]",
         'ip'  : './td[1]//text()',
         'port': './td[2]//text()',
         'position':'./td[3]//text()',
         'type': './td[4]//text()'
+    },
+    {
+        'url' : ['http://www.mimiip.com/gngao/%s' % n for n in range(1, 10)],
+        'root': ".//table[@class='list']/tr[position()>1]",
+        'ip'  : './td[1]//text()',
+        'port': './td[2]//text()',
+        'position':'./td[3]//text()',
+        'type':'./td[4]//text()'
+    },
+    {
+        'url' : ['http://www.ip181.com/daili/%s.html' % n for n in range(1, 11)],
+        'root': ".//div[@class='row']/div[3]/table/tbody/tr[position()>1]",
+        'ip'  : './td[1]//text()',
+        'port': './td[2]//text()',
+        'type': './td[3]//text()',
+        'position': './td[6]//text()'
+
+    },
+    {
+        'url' : ['http://www.xicidaili.com/%s/%s' % (m, n) for m in ['nn', 'nt', 'wn', 'wt'] for n in range(1, 8)],
+        'root': ".//*[@id='ip_list']/tr[position()>1]",
+        'ip'  : './td[2]//text()',
+        'port': './td[3]//text()',
+        'position': './td[4]//text()'
+        'type': './td[5]//text()',
+    },
+    {
+        'url' : ['http://superfastip.com/welcome/getips/%s' % n for n in range(1,11)],
+        'root': '//*[@id="iptable11"]//tr',
+        'ip'  : './td[2]//text()'
+        'port': './td[3]//text()'
+        'position': './td[4]//text()'
+        'type': './td[5]//text()'
+    },
+    {
+        'url' : ['http://www.kuaidaili.com/free/%s/%s/' % (m,n) for m in ['inha','intr','outha','outtr'] for n in range(1,10)],
+        'root': '//*[@id="list"]/table/tr',
+        'ip'  : './td[1]//text()',
+        'port': './td[2]//text()',
+        'type': './td[3]//text()',
+        'position': './td[5]//text()'
+    },
+    {
+        'url' : ['http://www.httpsdaili.com/?stype=%s&page=%s' %(m, n) for m in range(1,4) for n in range(1,5)],
+        'root': '//*[@id="list"]/table/tr',
+        'ip'  : './td[1]//text()',
+        'port': './td[2]//text()',
+        'type': './td[3]//text()',
+        'position': './td[5]//text()'
+    },
+    {
+        'url' : ['http://daili.wy96.com/page%s.asp' % n for n in range(1,10)],
+        'root': '//*[@id="list"]/table/tr',
+        'ip'  : './td[1]//text()',
+        'port': './td[2]//text()',
+        'type': './td[3]//text()',
+        'position': './td[5]//text()'
+
     }
-    # },
-    # {
-    #     'url': ['http://www.mimiip.com/gngao/%s' % n for n in range(1, 10)],
-    #     'type': 'xpath',
-    #     'pattern': ".//table[@class='list']/tr",
-    #     'position': {'ip': './td[1]', 'port': './td[2]', 'type': '', 'protocol': ''}
-    #
-    # },
-    # {
-    #     'url': ['https://proxy-list.org/english/index.php?p=%s' % n for n in range(1, 10)],
-    #     'type': 'module',
-    #     'moduleName': 'proxy_listPraser',
-    #     'pattern': 'Proxy\(.+\)',
-    #     'position': {'ip': 0, 'port': -1, 'type': -1, 'protocol': 2}
-    #
-    # },
-    # {
-    #     'url': ['http://incloak.com/proxy-list/%s#list' % n for n in
-    #              ([''] + ['?start=%s' % (64 * m) for m in range(1, 10)])],
-    #     'type': 'xpath',
-    #     'pattern': ".//table[@class='proxy__t']/tbody/tr",
-    #     'position': {'ip': './td[1]', 'port': './td[2]', 'type': '', 'protocol': ''}
-    #
-    # },
-    # {
-    #     'url': ['http://www.ip181.com/daili/%s.html' % n for n in range(1, 11)],
-    #     'type': 'xpath',
-    #     'pattern': ".//div[@class='row']/div[3]/table/tbody/tr[position()>1]",
-    #     'position': {'ip': './td[1]', 'port': './td[2]', 'type': './td[3]', 'protocol': './td[4]'}
-    #
-    # },
-    # {
-    #     'url': ['http://www.xicidaili.com/%s/%s' % (m, n) for m in ['nn', 'nt', 'wn', 'wt'] for n in range(1, 8)],
-    #     'type': 'xpath',
-    #     'pattern': ".//*[@id='ip_list']/tr[position()>1]",
-    #     'position': {'ip': './td[2]', 'port': './td[3]', 'type': './td[5]', 'protocol': './td[6]'}
-    # },
+
 
 ]
 

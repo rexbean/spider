@@ -34,6 +34,7 @@ class ArticlePipeline(object):
                 i += 1
                 Utility.writeArticleToFile(item)
                 return item
+                
 class AgentIpStorePipeline(object):
     def __init__(self,host,port,mongo_db,mongo_coll):
         self.host = host
